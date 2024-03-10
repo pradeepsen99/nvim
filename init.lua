@@ -1,3 +1,19 @@
+-- setup must be called before loading
+vim.cmd("colorscheme kanagawa-wave")
+
+-- Main settings
+vim.wo.relativenumber = true
+vim.opt.completeopt = "noinsert,menuone,noselect"
+vim.opt.showtabline=2
+vim.opt.number = true
+
+vim.api.nvim_set_keymap('n', '<leader><leader>', '<cmd>Telescope find_files<CR>', { noremap = true, silent = true })
+
+-- Key bindings
+vim.api.nvim_set_keymap('n', '<leader><leader>', '<cmd>Telescope find_files<CR>', { noremap = true, silent = true })
+vim.g.mapleader = ' '
+
+-- Plugins
 require('kanagawa').setup({
     compile = false,             -- enable compiling the colorscheme
     undercurl = true,            -- enable undercurls
@@ -29,32 +45,16 @@ require('telescope').setup{
     -- config_key = value,
     mappings = {
       i = {
-        -- map actions.which_key to <C-h> (default: <C-/>)
-        -- actions.which_key shows the mappings for your picker,
-        -- e.g. git_{create, delete, ...}_branch for the git_branches picker
         ["<C-h>"] = "which_key"
       }
     }
   },
   pickers = {
-    -- Default configuration for builtin pickers goes here:
-    -- picker_name = {
-    --   picker_config_key = value,
-    --   ...
-    -- }
     find_files = {
 	themes = "get_dropdown"
     }
-    -- Now the picker_config_key will be applied every time you call this
-    -- builtin picker
   },
-  extensions = {
-    -- Your extension configuration goes here:
-    -- extension_name = {
-    --   extension_config_key = value,
-    -- }
-    -- please take a look at the readme of the extension you want to configure
-  }
+  
 }
 
 -- Enable nvim-treesitter and configure it for TypeScript
@@ -66,12 +66,4 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
---require'lspconfig'.tsserver.setup {}
 
--- setup must be called before loading
-vim.cmd("colorscheme kanagawa-wave")
-
--- Main settings
-vim.wo.relativenumber = true
-vim.opt.completeopt = "noinsert,menuone,noselect"
-vim.opt.showtabline=2
