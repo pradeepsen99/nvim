@@ -1,0 +1,12 @@
+[submodule "pack/plugins/start/kanagawa.nvim"]
+	path = pack/plugins/start/kanagawa.nvim
+	url = git@github.com:rebelot/kanagawa.nvim.git
+[submodule "pack/plugins/start/nvim-treesitter"]
+	path = pack/plugins/start/nvim-treesitter
+	url = https://github.com/nvim-treesitter/nvim-treesitter
+[submodule "pack/plugins/start/plenary.nvim"]
+	path = pack/plugins/start/plenary.nvim
+	url = git@github.com:nvim-lua/plenary.nvim.git
+[submodule "pack/plugins/start/telescope.nvim"]
+	path = pack/plugins/start/telescope.nvim
+	url = git@github.com:nvim-telescope/telescope.nvim.git
