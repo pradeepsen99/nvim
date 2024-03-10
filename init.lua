@@ -1,17 +1,22 @@
--- setup must be called before loading
-vim.cmd("colorscheme kanagawa-wave")
-
 -- Main settings
 vim.wo.relativenumber = true
-vim.opt.completeopt = "noinsert,menuone,noselect"
+--vbm.opt.completeopt = "noinsert,menuone,noselect"
 vim.opt.showtabline=2
-vim.opt.number = true
 
-vim.api.nvim_set_keymap('n', '<leader><leader>', '<cmd>Telescope find_files<CR>', { noremap = true, silent = true })
 
--- Key bindings
-vim.api.nvim_set_keymap('n', '<leader><leader>', '<cmd>Telescope find_files<CR>', { noremap = true, silent = true })
+-- Key bindings--
+-- Leader key
 vim.g.mapleader = ' '
+
+-- Telescope key bindings
+vim.api.nvim_set_keymap('n', '<leader><leader>', '<cmd>Telescope find_files<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>sb', '<cmd>Telescope current_buffer_fuzzy_find<CR>', { noremap = true })
+
+-- Git key bindings
+vim.api.nvim_set_keymap('n', '<leader>gb', '<cmd>Git blame<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>gc', '<cmd>Git commit<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>gd', '<cmd>Git add<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>gs', '<cmd>Git status<CR>', { noremap = true })
 
 -- Plugins
 require('kanagawa').setup({
@@ -41,8 +46,6 @@ require('kanagawa').setup({
 
 require('telescope').setup{
   defaults = {
-    -- Default configuration for telescope goes here:
-    -- config_key = value,
     mappings = {
       i = {
         ["<C-h>"] = "which_key"
@@ -51,7 +54,7 @@ require('telescope').setup{
   },
   pickers = {
     find_files = {
-	themes = "get_dropdown"
+	    themes = "get_dropdown"
     }
   },
   
@@ -66,4 +69,5 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
-
+--setup must be called before loading
+vim.cmd("colorscheme kanagawa-wave")
