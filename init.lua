@@ -10,6 +10,8 @@
 -- \ \___\/ /      / / /_______\   / / /_______\   / / /           \/_/    / / /       / / /_       __\ \_\/ / /    / / /      
 --  \/_____/       \/__________/   \/__________/   \/_/                    \/_/        \_\___\     /____/_/\/_/     \/_/       
                                                                                                                              
+-- Author: Pradeep
+-- 
 
 -- Main settings
 vim.wo.relativenumber = true
@@ -34,6 +36,17 @@ vim.api.nvim_set_keymap('n', '<leader>gc', '<cmd>Git commit<CR>', { noremap = tr
 vim.api.nvim_set_keymap('n', '<leader>gd', '<cmd>Git add<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>gs', '<cmd>Git status<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>gp', '<cmd>Git push<CR>', { noremap = true })
+
+-- Session bindings
+vim.api.nvim_set_keymap('n', '<leader>ss', ':mksession! ~/.config/nvim/session.vim<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>so', ':source ~/.config/nvim/session.vim<CR>', { noremap = true, silent = true })
+
+-- Tab key bindings
+vim.api.nvim_set_keymap('n', '<leader>tn', ':tabnew<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>tc', ':tabclose<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader><tab>', ':tabnext<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader><s-tab>', ':tabprevious<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>tm', ':tabmove ', { noremap = true, silent = true })
 
 -- Plugins
 require('kanagawa').setup({
@@ -66,7 +79,7 @@ require('telescope').setup{
   defaults = {
     mappings = {
       i = {
-        ["<C-h>"] = "which_key"
+	["<C-h>"] = "which_key",
       }
     }
   },
@@ -80,7 +93,7 @@ require('telescope').setup{
 
 -- Enable nvim-treesitter and configure it for TypeScript
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = {'typescript'}, -- Install the parser
+  ensure_installed = {'typescript', 'python', 'javascript', 'lua'}, -- Install the parser
   highlight = {
     enable = true,              -- Enable syntax highlighting
     disable = {},               -- Disable syntax highlighting
