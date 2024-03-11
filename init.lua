@@ -20,7 +20,7 @@ vim.opt.showtabline=2
 vim.opt.list = true
 vim.opt.number = true
 vim.g.have_nerd_font = true
-
+vim.opt.statusline = "%{FugitiveStatusline()}"
 -- Key bindings--
 -- Leader key
 vim.g.mapleader = ' '
