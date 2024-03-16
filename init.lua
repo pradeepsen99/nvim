@@ -24,11 +24,13 @@ vim.opt.statusline = "%{FugitiveStatusline()}"
 -- Key bindings--
 -- Leader key
 vim.g.mapleader = ' '
+vim.opt.termguicolors = true
+
 
 -- Telescope key bindings
 vim.api.nvim_set_keymap('n', '<leader><leader>', '<cmd>Telescope find_files<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>sb', '<cmd>Telescope current_buffer_fuzzy_find<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>sp', '<cmd>Telescope live_grep<CR>', { noremap = true })
+
 
 -- Git key bindings
 vim.api.nvim_set_keymap('n', '<leader>gb', '<cmd>Git blame<CR>', { noremap = true })
@@ -47,6 +49,9 @@ vim.api.nvim_set_keymap('n', '<leader>tc', ':tabclose<CR>', { noremap = true, si
 vim.api.nvim_set_keymap('n', '<leader><tab>', ':tabnext<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader><s-tab>', ':tabprevious<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>tm', ':tabmove ', { noremap = true, silent = true })
+
+-- Tree key bindings
+vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 
 -- Plugins
 require('kanagawa').setup({
@@ -100,4 +105,18 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
---setup must be called before loading
+-- Enable nvim-tree
+require("nvim-tree").setup({
+  sort = {
+    sorter = "case_sensitive",
+  },
+  view = {
+    width = 30,
+  },
+  renderer = {
+    group_empty = true,
+  },
+  filters = {
+	  -- dotfiles = true,
+  },
+})

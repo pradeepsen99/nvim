@@ -14,13 +14,19 @@ else
   set shortmess=aoO
 endif
 badd +1 ~/Desktop/Research/Code/AVAT
-badd +1 src/ui_elements/Pages/main_upload.js
-badd +1 src/ui_elements/Components/fabric_canvas.js
-badd +0 src/ui_elements/Components/nav_bar.js
+badd +191 src/ui_elements/Pages/main_upload.js
+badd +215 src/ui_elements/Components/fabric_canvas.js
+badd +214 src/ui_elements/Components/nav_bar.js
 badd +1 src/fabric_types/fabric_boundingbox.js
+badd +55 src/processing/actions.js
+badd +60 src/processing/annotation-processing.js
+badd +1 test/navbar_test.py
+badd +38 src/reducer/metadata.js
+badd +10 src/reducer/frame_data.js
 argglobal
 %argdel
 $argadd ~/Desktop/Research/Code/AVAT
+tabnew +setlocal\ bufhidden=wipe
 tabnew +setlocal\ bufhidden=wipe
 tabnew +setlocal\ bufhidden=wipe
 tabrewind
@@ -37,17 +43,17 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 455 - ((59 * winheight(0) + 30) / 60)
+let s:l = 50 - ((18 * winheight(0) + 30) / 60)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 455
-normal! 0
+keepjumps 50
+normal! 030|
 lcd ~/Desktop/Research/Code/AVAT
 tabnext
-edit ~/Desktop/Research/Code/AVAT/src/ui_elements/Components/fabric_canvas.js
+edit ~/Desktop/Research/Code/AVAT/src/reducer/metadata.js
 argglobal
-balt ~/Desktop/Research/Code/AVAT/src/ui_elements/Pages/main_upload.js
+balt ~/Desktop/Research/Code/AVAT/src/processing/actions.js
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -58,17 +64,16 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 96 - ((35 * winheight(0) + 30) / 60)
+let s:l = 27 - ((26 * winheight(0) + 30) / 60)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 96
-normal! 025|
+keepjumps 27
+normal! 088|
 lcd ~/Desktop/Research/Code/AVAT
 tabnext
 edit ~/Desktop/Research/Code/AVAT/src/ui_elements/Components/nav_bar.js
 argglobal
-balt ~/Desktop/Research/Code/AVAT/src/ui_elements/Components/fabric_canvas.js
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -79,14 +84,35 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 103 - ((0 * winheight(0) + 30) / 60)
+let s:l = 66 - ((29 * winheight(0) + 30) / 60)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 103
-normal! 025|
+keepjumps 66
+normal! 046|
 lcd ~/Desktop/Research/Code/AVAT
-tabnext 2
+tabnext
+edit ~/Desktop/Research/Code/AVAT/src/ui_elements/Components/fabric_canvas.js
+argglobal
+balt ~/Desktop/Research/Code/AVAT/src/reducer/frame_data.js
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let &fdl = &fdl
+let s:l = 197 - ((25 * winheight(0) + 30) / 60)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 197
+normal! 0
+lcd ~/Desktop/Research/Code/AVAT
+tabnext 4
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif
@@ -99,7 +125,6 @@ if filereadable(s:sx)
 endif
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
-nohlsearch
 doautoall SessionLoadPost
 unlet SessionLoad
 " vim: set ft=vim :
