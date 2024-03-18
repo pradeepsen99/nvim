@@ -15,17 +15,25 @@
 
 -- Main settings
 vim.wo.relativenumber = true
-vim.opt.completeopt = "noinsert,menuone,noselect"
-vim.opt.showtabline=2
+vim.opt.completeopt = "menuone"
+vim.opt.showtabline=4
+vim.opt.tabstop = 4
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 4
+vim.opt.smartindent = true
 vim.opt.list = true
 vim.opt.number = true
 vim.g.have_nerd_font = true
-vim.opt.statusline = "%{FugitiveStatusline()}"
+vim.opt.termguicolors = true
+vim.opt.cursorline = true
+vim.opt.cursorcolumn = true
+
 -- Key bindings--
 -- Leader key
 vim.g.mapleader = ' '
-vim.opt.termguicolors = true
 
+-- Misc key bindings
+-- fold key bindings
 
 -- Telescope key bindings
 vim.api.nvim_set_keymap('n', '<leader><leader>', '<cmd>Telescope find_files<CR>', { noremap = true })
