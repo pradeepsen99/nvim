@@ -21,12 +21,12 @@ vim.opt.tabstop = 4
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
-vim.opt.list = true
+-- vim.opt.list = true
 vim.opt.number = true
 vim.g.have_nerd_font = true
 vim.opt.termguicolors = true
-vim.opt.cursorline = true
-vim.opt.cursorcolumn = true
+-- vim.opt.cursorline = true
+-- vim.opt.cursorcolumn = true
 
 -- Key bindings--
 -- Leader key
@@ -171,3 +171,5 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, opts)
   end,
 })
+
+require("ibl").setup()
