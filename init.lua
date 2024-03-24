@@ -27,6 +27,7 @@ vim.g.have_nerd_font = true
 vim.opt.termguicolors = true
 -- vim.opt.cursorline = true
 -- vim.opt.cursorcolumn = true
+vim.api.nvim_set_option("clipboard","unnamed")
 
 -- Key bindings--
 -- Leader key
@@ -44,7 +45,7 @@ vim.api.nvim_set_keymap('n', '<leader>tl', '<cmd>Telescope buffers<CR>', { norem
 -- Git key bindings
 vim.api.nvim_set_keymap('n', '<leader>gb', '<cmd>Git blame<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>gc', '<cmd>Git commit<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>gd', '<cmd>Git add<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>ga', '<cmd>Git add -p<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>gs', '<cmd>Git status<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>gp', '<cmd>Git push<CR>', { noremap = true })
 
