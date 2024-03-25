@@ -15,7 +15,7 @@
 
 -- Main settings
 vim.wo.relativenumber = true
-vim.opt.completeopt = "menuone"
+vim.opt.completeopt = "menuone,noselect"
 vim.opt.showtabline=4
 vim.opt.tabstop = 4
 vim.opt.expandtab = true
@@ -132,13 +132,20 @@ require("nvim-tree").setup({
 })
 
 -- Enable LSP
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require('lspconfig')
 lspconfig.tsserver.setup {
   -- allow this to be enabled on js files
+    capabilities = capabilities,
   filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
 }
-lspconfig.solargraph.setup{}
-lspconfig.pyright.setup{}
+lspconfig.solargraph.setup{
+    capabilities = capabilities,
+}
+lspconfig.pyright.setup{
+    capabilities = capabilities,
+}
+
 
 -- Enable Statusbar
 require('lualine').setup{
@@ -174,3 +181,29 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 require("ibl").setup()
+
+local cmp = require'cmp'
+
+  cmp.setup({
+
+    window = {
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
+    },
+    mapping = cmp.mapping.preset.insert({
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    }),
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'vsnip' }, -- For vsnip users.
+      -- { name = 'luasnip' }, -- For luasnip users.
+      -- { name = 'ultisnips' }, -- For ultisnips users.
+      -- { name = 'snippy' }, -- For snippy users.
+    }, {
+      { name = 'buffer' },
+    })
+  })

@@ -28,3 +28,12 @@
 [submodule "pack/plugins/start/indent-blankline.nvim"]
 	path = pack/plugins/start/indent-blankline.nvim
 	url = git@github.com:lukas-reineke/indent-blankline.nvim.git
+[submodule "pack/plugins/start/vim-commentary.git"]
+	path = pack/plugins/start/vim-commentary.git
+	url = git@github.com:tpope/vim-commentary.git
+[submodule "pack/plugins/start/nvim-cmp"]
+	path = pack/plugins/start/nvim-cmp
+	url = git@github.com:hrsh7th/nvim-cmp.git
+[submodule "pack/plugins/start/cmp-nvim-lsp"]
+	path = pack/plugins/start/cmp-nvim-lsp
+	url = git@github.com:hrsh7th/cmp-nvim-lsp.git
