@@ -37,3 +37,6 @@
 [submodule "pack/plugins/start/cmp-nvim-lsp"]
 	path = pack/plugins/start/cmp-nvim-lsp
 	url = git@github.com:hrsh7th/cmp-nvim-lsp.git
+[submodule "pack/plugins/start/catpuccin"]
+	path = pack/plugins/start/catpuccin
+	url = git@github.com:catppuccin/nvim.git
