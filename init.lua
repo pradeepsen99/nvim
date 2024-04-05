@@ -169,6 +169,9 @@ lspconfig.solargraph.setup{
 lspconfig.pyright.setup{
     capabilities = capabilities,
 }
+lspconfig.gopls.setup{
+    capabilities = capabilities,
+}
 
 
 -- Enable Statusbar
