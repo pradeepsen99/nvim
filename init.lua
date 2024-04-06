@@ -20,12 +20,9 @@ vim.opt.tabstop = 4
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
--- vim.opt.list = true
 vim.opt.number = true
 vim.g.have_nerd_font = true
 vim.opt.termguicolors = true
--- vim.opt.cursorline = true
--- vim.opt.cursorcolumn = true
 vim.api.nvim_set_option("clipboard","unnamed")
 
 -- Key bindings--
@@ -71,7 +68,7 @@ require("catppuccin").setup({
         dark = "mocha",
     },
     transparent_background = false, -- disables setting the background color.
-    show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
+    show_end_of_buffer = true, -- shows the '~' characters after the end of buffers
     term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
     dim_inactive = {
         enabled = false, -- dims the background color of inactive window
@@ -109,7 +106,6 @@ require("catppuccin").setup({
             enabled = true,
             indentscope_color = "",
         },
-        -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
     },
 })
 
