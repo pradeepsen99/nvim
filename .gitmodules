@@ -40,3 +40,6 @@
 [submodule "pack/plugins/start/catpuccin"]
 	path = pack/plugins/start/catpuccin
 	url = git@github.com:catppuccin/nvim.git
+[submodule "pack/plugins/start/vim-rails"]
+	path = pack/plugins/start/vim-rails
+	url = https://github.com/tpope/vim-rails

@@ -61,8 +61,7 @@ vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = tru
 
 -- Plugins
 require("catppuccin").setup({
-    flavour = "mocha", -- latte, frappe, macchiato, mocha
-    -- flavour = "auto" -- will respect terminal's background
+    flavour = "mocha", 
     background = { -- :h background
         light = "latte",
         dark = "mocha",
@@ -131,7 +130,6 @@ require'nvim-treesitter.configs'.setup {
   ensure_installed = {'typescript', 'python', 'javascript', 'lua'}, -- Install the parser
   highlight = {
     enable = true,              -- Enable syntax highlighting
-    disable = {},               -- Disable syntax highlighting
   },
 }
 
