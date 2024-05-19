@@ -24,6 +24,7 @@ vim.opt.number = true
 vim.g.have_nerd_font = true
 vim.opt.termguicolors = true
 vim.api.nvim_set_option("clipboard","unnamed")
+vim.api.cmdheight = 0
 
 -- Key bindings--
 -- Leader key
