@@ -31,6 +31,8 @@ vim.api.cmdheight = 0
 vim.g.mapleader = ' '
 
 -- Misc key bindings
+vim.api.nvim_set_keymap('n', '<leader>d', ':let @+ = expand("%:p")<CR>', { noremap = true, silent = true })
+
 -- fold key bindings
 
 -- Telescope key bindings
