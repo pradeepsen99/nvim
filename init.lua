@@ -31,6 +31,8 @@ vim.opt.cmdheight = 0
 vim.g.mapleader = ' '
 
 -- Misc key bindings
+vim.api.nvim_set_keymap('n', '<leader>d', ':let @+ = expand("%:p")<CR>', { noremap = true, silent = true })
+
 -- fold key bindings
 
 -- Telescope key bindings
@@ -148,6 +150,9 @@ require("nvim-tree").setup({
   filters = {
 	  -- dotfiles = true,
   },
+  update_focused_file = {
+    enable = true,
+  }
 })
 
 -- Enable LSP
