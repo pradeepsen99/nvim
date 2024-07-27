@@ -122,7 +122,8 @@ vim.cmd.colorscheme "catppuccin"require('telescope').setup{
   },
   pickers = {
     find_files = {
-	    themes = "get_dropdown"
+	themes = "get_dropdown",
+        hidden = true
     }
   },
   
