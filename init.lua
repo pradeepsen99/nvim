@@ -126,7 +126,8 @@ vim.cmd.colorscheme "catppuccin"require('telescope').setup{
   },
   pickers = {
     find_files = {
-	    themes = "get_dropdown"
+	themes = "get_dropdown",
+        hidden = true
     }
   },
   
@@ -170,10 +171,16 @@ lspconfig.tsserver.setup {
 lspconfig.solargraph.setup{
     capabilities = capabilities,
 }
-lspconfig.pyright.setup{
+-- lspconfig.pyright.setup{
+--     capabilities = capabilities,
+--     analysis = {
+--         typeCheckingMode = "off",
+--     },
+-- }
+lspconfig.gopls.setup{
     capabilities = capabilities,
 }
-lspconfig.gopls.setup{
+lspconfig.jedi_language_server.setup{
     capabilities = capabilities,
 }
 
