@@ -16,7 +16,7 @@
 -- Main settings
 vim.wo.relativenumber = true
 vim.opt.completeopt = "menuone,noselect"
-vim.opt.tabstop = 4
+vim.opt.tabstop = 2
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
@@ -24,7 +24,7 @@ vim.opt.number = true
 vim.g.have_nerd_font = true
 vim.opt.termguicolors = true
 vim.api.nvim_set_option("clipboard","unnamed")
-vim.api.cmdheight = 0
+vim.opt.cmdheight = 0
 
 -- Key bindings--
 -- Leader key
@@ -32,6 +32,7 @@ vim.g.mapleader = ' '
 
 -- Misc key bindings
 vim.api.nvim_set_keymap('n', '<leader>d', ':let @+ = expand("%:p")<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', 'p', 'pgvy', { noremap = true })
 
 -- fold key bindings
 
@@ -61,6 +62,9 @@ vim.api.nvim_set_keymap('n', '<leader>tm', ':tabmove ', { noremap = true, silent
 
 -- Tree key bindings
 vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+
+-- Random
+vim.cmd('syntax enable')
 
 -- Plugins
 require("catppuccin").setup({
