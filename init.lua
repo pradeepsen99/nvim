@@ -167,10 +167,16 @@ lspconfig.tsserver.setup {
 lspconfig.solargraph.setup{
     capabilities = capabilities,
 }
-lspconfig.pyright.setup{
+-- lspconfig.pyright.setup{
+--     capabilities = capabilities,
+--     analysis = {
+--         typeCheckingMode = "off",
+--     },
+-- }
+lspconfig.gopls.setup{
     capabilities = capabilities,
 }
-lspconfig.gopls.setup{
+lspconfig.jedi_language_server.setup{
     capabilities = capabilities,
 }
 

@@ -43,6 +43,3 @@
 [submodule "pack/plugins/start/vim-rails"]
 	path = pack/plugins/start/vim-rails
 	url = https://github.com/tpope/vim-rails
-[submodule "pack/plugins/start/jedi-vim"]
-	path = pack/plugins/start/jedi-vim
-	url = https://github.com/davidhalter/jedi-vim
