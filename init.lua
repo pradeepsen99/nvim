@@ -171,18 +171,22 @@ lspconfig.tsserver.setup {
 lspconfig.solargraph.setup{
     capabilities = capabilities,
 }
--- lspconfig.pyright.setup{
---     capabilities = capabilities,
---     analysis = {
---         typeCheckingMode = "off",
---     },
--- }
+lspconfig.pyright.setup{
+    capabilities = capabilities,
+    settings = {
+        python = {
+            analysis = {
+                typeCheckingMode = "off",
+            },
+        },
+    },
+}
 lspconfig.gopls.setup{
     capabilities = capabilities,
 }
-lspconfig.jedi_language_server.setup{
-    capabilities = capabilities,
-}
+-- lspconfig.jedi_language_server.setup{
+--     capabilities = capabilities,
+-- }
 
 
 -- Enable Statusbar
