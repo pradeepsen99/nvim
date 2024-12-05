@@ -15,6 +15,7 @@
 -- Main settings
 vim.wo.relativenumber = true
 vim.opt.completeopt = "menuone,noselect"
+vim.opt.tabstop = 2
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.number = true
@@ -33,6 +34,7 @@ vim.g.mapleader = ' '
 
 -- Misc key bindings
 vim.api.nvim_set_keymap('n', '<leader>d', ':let @+ = expand("%:p")<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', 'p', 'pgvy', { noremap = true })
 
 -- 
 vim.api.nvim_set_keymap('n', '$', 'g_', { noremap = true })
@@ -64,6 +66,9 @@ vim.api.nvim_set_keymap('n', '<leader>tm', ':tabmove ', { noremap = true, silent
 
 -- Tree key bindings
 vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+
+-- Random
+vim.cmd('syntax enable')
 
 -- Plugins
 require("catppuccin").setup({
@@ -170,18 +175,22 @@ lspconfig.tsserver.setup {
 lspconfig.solargraph.setup{
     capabilities = capabilities,
 }
--- lspconfig.pyright.setup{
---     capabilities = capabilities,
---     analysis = {
---         typeCheckingMode = "off",
---     },
--- }
+lspconfig.pyright.setup{
+    capabilities = capabilities,
+    settings = {
+        python = {
+            analysis = {
+                typeCheckingMode = "off",
+            },
+        },
+    },
+}
 lspconfig.gopls.setup{
     capabilities = capabilities,
 }
-lspconfig.jedi_language_server.setup{
-    capabilities = capabilities,
-}
+-- lspconfig.jedi_language_server.setup{
+--     capabilities = capabilities,
+-- }
 
 
 -- Enable Statusbar
