@@ -1,5 +1,4 @@
-                                                                                                                             
---      /\ \               /\ \            /\ \            /\ \           /\_\/\_\ _           / /\                /\ \     _  
+                                                                                                                             --      /\ \               /\ \            /\ \            /\ \           /\_\/\_\ _           / /\                /\ \     _  
 --     /  \ \____         /  \ \          /  \ \          /  \ \         / / / / //\_\        / /  \              /  \ \   /\_\
 --    / /\ \_____\       / /\ \ \        / /\ \ \        / /\ \ \       /\ \/ \ \/ / /       / / /\ \            / /\ \ \_/ / /
 --   / / /\/___  /      / / /\ \_\      / / /\ \_\      / / /\ \_\     /  \____\__/ /       / / /\ \ \          / / /\ \___/ / 
@@ -16,15 +15,17 @@
 -- Main settings
 vim.wo.relativenumber = true
 vim.opt.completeopt = "menuone,noselect"
-vim.opt.tabstop = 4
 vim.opt.expandtab = true
-vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
 vim.opt.number = true
 vim.g.have_nerd_font = true
 vim.opt.termguicolors = true
 vim.api.nvim_set_option("clipboard","unnamed")
 vim.opt.cmdheight = 0
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.softtabstop = 2
+-- vim.opt.cindent = true
 
 -- Key bindings--
 -- Leader key
@@ -33,7 +34,9 @@ vim.g.mapleader = ' '
 -- Misc key bindings
 vim.api.nvim_set_keymap('n', '<leader>d', ':let @+ = expand("%:p")<CR>', { noremap = true, silent = true })
 
--- fold key bindings
+-- 
+vim.api.nvim_set_keymap('n', '$', 'g_', { noremap = true })
+vim.api.nvim_set_keymap('v', '$', 'g_', { noremap = true })
 
 -- Telescope key bindings
 vim.api.nvim_set_keymap('n', '<leader><leader>', '<cmd>Telescope find_files<CR>', { noremap = true })
@@ -218,26 +221,34 @@ require("ibl").setup()
 
 local cmp = require'cmp'
 
-  cmp.setup({
-
-    window = {
-      completion = cmp.config.window.bordered(),
-      documentation = cmp.config.window.bordered(),
-    },
-    mapping = cmp.mapping.preset.insert({
-      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-f>'] = cmp.mapping.scroll_docs(4),
-      ['<C-Space>'] = cmp.mapping.complete(),
-      ['<C-e>'] = cmp.mapping.abort(),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    }),
-    sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
-      { name = 'vsnip' }, -- For vsnip users.
-      -- { name = 'luasnip' }, -- For luasnip users.
-      -- { name = 'ultisnips' }, -- For ultisnips users.
-      -- { name = 'snippy' }, -- For snippy users.
-    }, {
-      { name = 'buffer' },
-    })
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)    
+    end,
+  },
+  completion = {
+    completeopt = 'menu,menuone,noselect',
+    max_item_count = 5,
+    keyword_length = 2
+  },
+  window = {
+    documentation = cmp.config.window.bordered(),
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+  }),
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'vsnip' }, -- For vsnip users.
+    -- { name = 'luasnip' }, -- For luasnip users.
+    -- { name = 'ultisnips' }, -- For ultisnips users.
+    -- { name = 'snippy' }, -- For snippy users.
+  }, {
+    { name = 'buffer' },
   })
+})

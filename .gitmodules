@@ -43,3 +43,9 @@
 [submodule "pack/plugins/start/vim-rails"]
 	path = pack/plugins/start/vim-rails
 	url = https://github.com/tpope/vim-rails
+[submodule "pack/plugins/start/vim-vsnip.git"]
+	path = pack/plugins/start/vim-vsnip.git
+	url = git@github.com:hrsh7th/vim-vsnip.git
+[submodule "pack/plugins/start/go.nvim.git"]
+	path = pack/plugins/start/go.nvim.git
+	url = git@github.com:ray-x/go.nvim.git
