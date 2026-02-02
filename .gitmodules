@@ -49,3 +49,9 @@
 [submodule "pack/plugins/start/go.nvim.git"]
 	path = pack/plugins/start/go.nvim.git
 	url = git@github.com:ray-x/go.nvim.git
+[submodule "pack/plugins/start/nui.nvim"]
+	path = pack/plugins/start/nui.nvim
+	url = https://github.com/MunifTanjim/nui.nvim
+[submodule "pack/plugins/start/noice.nvim"]
+	path = pack/plugins/start/noice.nvim
+	url = https://github.com/folke/noice.nvim

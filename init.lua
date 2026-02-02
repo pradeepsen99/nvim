@@ -77,7 +77,7 @@ require("catppuccin").setup({
         light = "latte",
         dark = "mocha",
     },
-    transparent_background = false, -- disables setting the background color.
+    transparent_background = true, -- disables setting the background color.
     show_end_of_buffer = true, -- shows the '~' characters after the end of buffers
     term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
     dim_inactive = {
@@ -112,6 +112,7 @@ require("catppuccin").setup({
         nvimtree = true,
         treesitter = true,
         notify = false,
+        noice = true,
         mini = {
             enabled = true,
             indentscope_color = "",
@@ -120,7 +121,8 @@ require("catppuccin").setup({
 })
 
 -- setup must be called before loading
-vim.cmd.colorscheme "catppuccin"require('telescope').setup{
+vim.cmd.colorscheme "catppuccin"
+require('telescope').setup{
   defaults = {
     mappings = {
       i = {
@@ -139,7 +141,7 @@ vim.cmd.colorscheme "catppuccin"require('telescope').setup{
 
 -- Enable nvim-treesitter and configure it for TypeScript
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = {'typescript', 'python', 'javascript', 'lua'}, -- Install the parser
+  ensure_installed = {'typescript', 'python', 'javascript', 'lua', 'vim', 'regex', 'bash', 'markdown', 'markdown_inline'}, -- Install the parser
   highlight = {
     enable = true,              -- Enable syntax highlighting
   },
@@ -227,6 +229,25 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 require("ibl").setup()
+
+-- Enable noice.nvim
+require("noice").setup({
+  lsp = {
+    -- Override markdown rendering so that cmp and other plugins use Treesitter
+    override = {
+      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+      ["vim.lsp.util.stylize_markdown"] = true,
+      ["cmp.entry.get_documentation"] = true, -- Integrates with nvim-cmp
+    },
+  },
+  presets = {
+    bottom_search = true, -- Use a classic bottom cmdline for search
+    command_palette = true, -- Position the cmdline and popupmenu together
+    long_message_to_split = true, -- Long messages will be sent to a split
+    inc_rename = false, -- Enables an input dialog for inc-rename.nvim
+    lsp_doc_border = false, -- Add a border to hover docs and signature help
+  },
+})
 
 local cmp = require'cmp'
 
