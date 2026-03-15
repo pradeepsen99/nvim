@@ -23,10 +23,44 @@ vim.g.have_nerd_font = true
 vim.opt.termguicolors = true
 vim.api.nvim_set_option("clipboard","unnamed")
 vim.opt.cmdheight = 0
-vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 -- vim.opt.cindent = true
+
+local indentation_group = vim.api.nvim_create_augroup('FiletypeIndentation', { clear = true })
+
+vim.api.nvim_create_autocmd('FileType', {
+  group = indentation_group,
+  pattern = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'lua', 'ruby' },
+  callback = function()
+    vim.opt_local.expandtab = true
+    vim.opt_local.tabstop = 2
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.softtabstop = 2
+  end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  group = indentation_group,
+  pattern = 'python',
+  callback = function()
+    vim.opt_local.expandtab = true
+    vim.opt_local.tabstop = 4
+    vim.opt_local.shiftwidth = 4
+    vim.opt_local.softtabstop = 4
+  end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  group = indentation_group,
+  pattern = 'go',
+  callback = function()
+    vim.opt_local.expandtab = false
+    vim.opt_local.tabstop = 4
+    vim.opt_local.shiftwidth = 4
+    vim.opt_local.softtabstop = 4
+  end,
+})
 
 -- Key bindings--
 -- Leader key
