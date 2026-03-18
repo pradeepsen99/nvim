@@ -158,6 +158,9 @@ require("catppuccin").setup({
 vim.cmd.colorscheme "catppuccin"
 require('telescope').setup{
   defaults = {
+    preview = {
+      treesitter = false,
+    },
     mappings = {
       i = {
 	["<C-h>"] = "which_key",
