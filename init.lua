@@ -170,7 +170,11 @@ require('telescope').setup{
   pickers = {
     find_files = {
 	themes = "get_dropdown",
-        hidden = true
+        hidden = true,
+        no_ignore = true,
+    },
+    live_grep = {
+      additional_args = { "--no-ignore" },
     }
   },
   
