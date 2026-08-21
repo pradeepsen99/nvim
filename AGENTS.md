@@ -5,7 +5,7 @@ Guidance for coding agents working in `nvim`.
 ## Scope
 
 - This repo is a personal Neovim configuration.
-- First-party code is mainly `init.lua`, plus a small helper script.
+- First-party code is `init.lua` plus the modules under `lua/`, and a small helper script.
 - `pack/plugins/start/*` contains git submodules, not first-party app code.
 - Treat submodules as vendored dependencies unless the user explicitly asks you to edit one.
 - The source of truth for installed plugins is `.gitmodules`.
@@ -13,14 +13,17 @@ Guidance for coding agents working in `nvim`.
 ## Rule Sources
 
 - `CLAUDE.md` exists and is active guidance for this repo.
-- Its guidance is reflected here: single-file config, submodule-managed plugins, existing keymap and LSP patterns.
+- Its guidance is reflected here: modular config under `lua/`, submodule-managed plugins, existing keymap and LSP patterns.
 - No `.cursor/rules/` directory was found during repo scan.
 - No `.cursorrules` file was found.
 - No `.github/copilot-instructions.md` file was found.
 
 ## Repository Layout
 
-- `init.lua`: main Neovim config.
+- `init.lua`: entry point - the banner plus an ordered list of `require` calls, no logic.
+- `lua/config/`: `options.lua`, `keymaps.lua`, `autocmds.lua`.
+- `lua/plugins/`: `ui.lua` (catppuccin + colorscheme, lualine, indent-blankline, noice), `editor.lua` (telescope, treesitter, nvim-tree), `lsp.lua`, `completion.lua`.
+- `lua/git/`: `inline_blame.lua` and `blame_age.lua` - first-party git-blame features, not plugins.
 - `.gitmodules`: canonical plugin list.
 - `install_packages.sh`: setup helper with dependency checks.
 - `README.md`: short overview and keybinding map.
@@ -55,8 +58,9 @@ Guidance for coding agents working in `nvim`.
 
 ## Validation Expectations
 
-- After editing `init.lua`, run `nvim --headless "+qa"`.
-- Current observed startup behavior: Neovim loads, but emits a deprecation warning for `vim.tbl_add_reverse_lookup`.
+- After editing `init.lua` or any module under `lua/`, run `nvim --headless "+qa"`.
+- To check every module parses: `nvim --headless -c 'lua for _,f in ipairs(vim.fn.glob("lua/**/*.lua",0,1)) do assert(loadfile(f)) end print("ok")' -c 'qa'`.
+- Current observed startup behavior: clean - Neovim loads with no output and no deprecation warnings. Treat any new startup output as a regression.
 - For keymap changes, manually verify the mapping in `nvim`.
 - For plugin config changes, verify startup and the specific affected plugin behavior.
 - For LSP changes, open a matching filetype and confirm the server attaches.
@@ -64,9 +68,10 @@ Guidance for coding agents working in `nvim`.
 
 ## Architecture
 
-- The configuration is intentionally centralized in one file.
-- Preserve the existing high-level order in `init.lua` unless the user asks for a refactor.
-- Current order is roughly: settings, keymaps, plugin setup, LSP setup, UI extras, completion.
+- The configuration is split by concern across `lua/`; `init.lua` only wires the modules together.
+- Put a change in the module that already covers that area rather than in `init.lua`.
+- `init.lua` lists its requires explicitly, and that list is the load order.
+- Load order that matters: `config.options` -> `config.keymaps` (sets `mapleader`) -> `config.autocmds` -> `plugins.*` (colorscheme first) -> `git.*` (reads the catppuccin palette).
 - Keep plugin setup close to related comments and nearby plugin blocks.
 - Respect ordering constraints, such as configuring a colorscheme before loading it.
 - Prefer focused edits over broad restructuring.
@@ -75,7 +80,7 @@ Guidance for coding agents working in `nvim`.
 
 - Match the existing repository style before applying generic Lua preferences.
 - Keep code direct and configuration-oriented; avoid unnecessary abstractions.
-- Preserve the single-file approach unless the user explicitly requests modularization.
+- Preserve the module boundaries; do not move code back into `init.lua` or collapse modules together.
 - Keep diffs small and local.
 - Avoid large cleanup passes while doing feature work.
 - Use ASCII unless the file already needs something else.
@@ -93,9 +98,10 @@ Guidance for coding agents working in `nvim`.
 
 - Use `require(...)` near the section that configures the plugin or feature.
 - Store repeated module references in `local` variables.
-- Existing root patterns include `local lspconfig = require('lspconfig')` and `local cmp = require'cmp'`.
+- Existing root patterns include `local cmp = require'cmp'` and `local capabilities = require('cmp_nvim_lsp').default_capabilities(...)`.
+- Modules are side-effect-only: they run their setup on `require` and return nothing.
 - Do not introduce custom loader layers for this small config.
-- When adding a plugin, configure it inline in `init.lua` unless asked to refactor structure.
+- When adding a plugin, configure it in the matching `lua/plugins/*.lua` file; add a new module plus a `require` in `init.lua` only if it fits none of them.
 
 ## Lua, Types, and Naming
 
@@ -109,8 +115,8 @@ Guidance for coding agents working in `nvim`.
 
 ## Keymaps
 
-- Top-level mappings currently use `vim.api.nvim_set_keymap`.
-- Buffer-local LSP mappings currently use `vim.keymap.set` inside `LspAttach`.
+- Top-level mappings live in `lua/config/keymaps.lua` and use `vim.api.nvim_set_keymap`.
+- Buffer-local LSP mappings use `vim.keymap.set` inside the `LspAttach` autocmd in `lua/plugins/lsp.lua`.
 - Preserve that adjacent style unless you have a strong local reason not to.
 - Keep leader mappings mnemonic and grouped by feature area.
 - Avoid changing existing bindings unless the task requires it.
@@ -126,11 +132,13 @@ Guidance for coding agents working in `nvim`.
 
 ## LSP and Completion
 
-- Reuse shared `cmp_nvim_lsp` capabilities when adding or editing LSP servers.
+- LSP uses the Nvim 0.11 native API - `vim.lsp.config` plus `vim.lsp.enable`. Do not reintroduce `require('lspconfig')`: it is deprecated and requiring it puts a warning back in the startup output.
+- Server definitions come from nvim-lspconfig's `lsp/` directory; override only the fields that differ from those defaults.
+- Shared `cmp_nvim_lsp` capabilities are applied once via `vim.lsp.config('*', ...)`; do not re-add them per server.
 - Keep buffer-local LSP bindings inside the `LspAttach` autocmd.
 - Match the existing small-table setup style for server configs.
 - Respect intentional current settings, including `pyright` type checking set to `off`.
-- Keep `nvim-cmp` source and mapping changes inside the existing completion section unless a larger refactor is requested.
+- Keep `nvim-cmp` source and mapping changes inside `lua/plugins/completion.lua`.
 - Verify filetype-specific behavior manually when changing LSP or completion.
 
 ## Error Handling
@@ -152,7 +160,7 @@ Guidance for coding agents working in `nvim`.
 ## What To Avoid
 
 - Do not replace the native package setup with a plugin manager unless explicitly asked.
-- Do not split `init.lua` into modules just because it seems cleaner.
+- Do not merge the `lua/` modules back into `init.lua`, and do not add a glob-based module loader.
 - Do not assume submodule tests validate root config changes.
 - Do not claim build, lint, or test commands exist at root when they only exist in submodules.
 - Do not edit vendored plugin code for a root task.
@@ -160,7 +168,7 @@ Guidance for coding agents working in `nvim`.
 
 ## Default Agent Workflow
 
-- Read `CLAUDE.md`, `init.lua`, and nearby files before editing.
+- Read `CLAUDE.md`, `init.lua`, and the relevant module under `lua/` before editing.
 - Make the smallest reasonable change in first-party code.
 - Validate with `nvim --headless "+qa"` after config edits.
 - Do any necessary manual verification in `nvim` for behavior that has no automated test.
