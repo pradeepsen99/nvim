@@ -66,7 +66,7 @@ vim.api.nvim_create_autocmd('VimEnter', {
     end
     local menu = {
       { 'f', 'Find files', '<cmd>Telescope find_files<CR>' },
-      { 'r', 'Recent files', '<cmd>Telescope oldfiles<CR>' },
+      { 'o', 'Recent files', '<cmd>Telescope oldfiles<CR>' },
       { 'g', 'Search text', '<cmd>Telescope live_grep<CR>' },
       { 's', 'Restore session', function()
         local session = vim.fn.stdpath('config') .. '/session.vim'
@@ -191,8 +191,7 @@ vim.api.nvim_create_autocmd('VimEnter', {
       end, { ['repeat'] = -1 })
       draw_startup(false)
     end
-    -- Allow longer Space-led mappings to resolve before rotating.
-    vim.keymap.set('n', '<Space>', rotate_banner, { buffer = buffer, silent = true, desc = 'Rotate DEEPMAN once' })
+    vim.keymap.set('n', 'r', rotate_banner, { buffer = buffer, silent = true, desc = 'Rotate DEEPMAN once' })
     for _, click_key in ipairs({ '<LeftMouse>', '<2-LeftMouse>', '<3-LeftMouse>', '<4-LeftMouse>' }) do
       vim.keymap.set('n', click_key, function()
         local mouse = vim.fn.getmousepos()
