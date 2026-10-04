@@ -27,8 +27,10 @@ lua/git/blame_age.lua          commit-age gutter          (<leader>gh)
 ## Startup page
 
 Running `nvim` without a file opens a plugin-free welcome page showing the
-original DEEPMAN ASCII banner. Click the banner to play one rotation, then return
-to the original. Additional clicks during playback do not restart it.
+original DEEPMAN ASCII banner. Press Space or click the banner to play one
+rotation, then return to the original. Repeated triggers during playback do not
+restart it. Space on its own waits for the normal leader-key timeout so existing
+Space-led shortcuts still work.
 
 The 36 text frames in `frames/frame_01.txt` through `frames/frame_36.txt` play at
 80 ms per frame, inspired by [Codex's OpenAI animation](https://github.com/openai/codex/tree/6b0a1a8325640767b46f41525561f4f16b59abfd/codex-rs/tui/frames/openai).
@@ -45,6 +47,7 @@ mouse setting is restored when you leave it.
 
 | Key | Action |
 | --- | --- |
+| `Space` | Rotate DEEPMAN once |
 | `f` | Find files |
 | `r` | Recent files |
 | `g` | Search text |

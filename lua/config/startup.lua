@@ -191,6 +191,8 @@ vim.api.nvim_create_autocmd('VimEnter', {
       end, { ['repeat'] = -1 })
       draw_startup(false)
     end
+    -- Allow longer Space-led mappings to resolve before rotating.
+    vim.keymap.set('n', '<Space>', rotate_banner, { buffer = buffer, silent = true, desc = 'Rotate DEEPMAN once' })
     for _, click_key in ipairs({ '<LeftMouse>', '<2-LeftMouse>', '<3-LeftMouse>', '<4-LeftMouse>' }) do
       vim.keymap.set('n', click_key, function()
         local mouse = vim.fn.getmousepos()
