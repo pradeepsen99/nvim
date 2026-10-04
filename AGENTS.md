@@ -21,7 +21,7 @@ Guidance for coding agents working in `nvim`.
 ## Repository Layout
 
 - `init.lua`: entry point - the banner plus an ordered list of `require` calls, no logic.
-- `lua/config/`: `options.lua`, `keymaps.lua`, `autocmds.lua`.
+- `lua/config/`: `options.lua`, `keymaps.lua`, `autocmds.lua`, `startup.lua` (DEEPMAN welcome page).
 - `lua/plugins/`: `ui.lua` (catppuccin + colorscheme, lualine, indent-blankline, noice), `editor.lua` (telescope, treesitter, nvim-tree), `lsp.lua`, `completion.lua`.
 - `lua/git/`: `inline_blame.lua` and `blame_age.lua` - first-party git-blame features, not plugins.
 - `.gitmodules`: canonical plugin list.

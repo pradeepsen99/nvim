@@ -15,6 +15,7 @@ init.lua                       banner + ordered requires
 lua/config/options.lua         editor settings
 lua/config/keymaps.lua         leader + all global keybinds
 lua/config/autocmds.lua        per-filetype indentation
+lua/config/startup.lua         DEEPMAN welcome page
 lua/plugins/ui.lua             catppuccin, lualine, indent-blankline, noice
 lua/plugins/editor.lua         telescope, treesitter, nvim-tree
 lua/plugins/lsp.lua            LSP servers + on-attach keybinds
@@ -22,6 +23,23 @@ lua/plugins/completion.lua     nvim-cmp + vsnip
 lua/git/inline_blame.lua       inline blame virtual text  (<leader>gB)
 lua/git/blame_age.lua          commit-age gutter          (<leader>gh)
 ```
+
+## Startup page
+
+Running `nvim` without a file opens a plugin-free DEEPMAN welcome page. It uses
+this config's ASCII banner in wide terminals and a compact title in narrow ones.
+
+| Key | Action |
+| --- | --- |
+| `f` | Find files |
+| `r` | Recent files |
+| `g` | Search text |
+| `s` | Restore the session saved with `<leader>ss` |
+| `n` | New file |
+| `q` | Quit |
+
+The page skips file arguments, restored sessions, piped input, and headless runs.
+Existing leader mappings also work on the page.
 
 ## Keybindings
 

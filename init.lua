@@ -23,3 +23,5 @@ require('plugins.completion')
 
 require('git.inline_blame')
 require('git.blame_age')
+
+require('config.startup')

@@ -24,6 +24,7 @@ The source of truth for plugins is `.gitmodules` - all installed plugins are git
 | `lua/config/options.lua` | Editor settings: tab width (2 spaces), relative line numbers, clipboard, `cmdheight=0`, `syntax enable` |
 | `lua/config/keymaps.lua` | Leader key and all global keybinds, via `vim.api.nvim_set_keymap` |
 | `lua/config/autocmds.lua` | `FiletypeIndentation` augroup: per-filetype indent overrides |
+| `lua/config/startup.lua` | DEEPMAN welcome page for interactive startup without files |
 | `lua/plugins/ui.lua` | catppuccin + `colorscheme`, lualine, indent-blankline, noice |
 | `lua/plugins/editor.lua` | telescope, nvim-treesitter, nvim-tree |
 | `lua/plugins/lsp.lua` | LSP server configs and the `LspAttach` keybind autocmd |
