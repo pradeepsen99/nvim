@@ -26,8 +26,22 @@ lua/git/blame_age.lua          commit-age gutter          (<leader>gh)
 
 ## Startup page
 
-Running `nvim` without a file opens a plugin-free DEEPMAN welcome page. It uses
-this config's ASCII banner in wide terminals and a compact title in narrow ones.
+Running `nvim` without a file opens a plugin-free welcome page showing the
+original DEEPMAN ASCII banner. Click the banner to play one rotation, then return
+to the original. Additional clicks during playback do not restart it.
+
+The 36 text frames in `frames/frame_01.txt` through `frames/frame_36.txt` play at
+80 ms per frame, inspired by [Codex's OpenAI animation](https://github.com/openai/codex/tree/6b0a1a8325640767b46f41525561f4f16b59abfd/codex-rs/tui/frames/openai).
+The rotating frames use the original slanted outline artwork, with an exact
+copy of the original at the start and end. Frames load once at startup in
+filename order. Keep the zero-padded names and
+equal line counts when editing them; trailing spaces are unnecessary.
+
+Narrow windows show a compact DEEPMAN title. Rotation requires a window at
+least 129 columns wide to fit the original 125-column artwork. The menu stays in place during rotation. Playback
+pauses during picker and command input, and stops when the page closes or the
+window becomes too small. Mouse input is enabled for the page and your previous
+mouse setting is restored when you leave it.
 
 | Key | Action |
 | --- | --- |
